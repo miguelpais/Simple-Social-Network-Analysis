@@ -18,6 +18,7 @@ int get_line_from_file(ifstream &infile, string &token, string &idfrom, string &
 	infile >> idto;
 	if(infile.fail())
 		return -1;
+	return 0;
 }
 
 /* FUNCTION: check_and_add_vertex
@@ -49,8 +50,7 @@ void check_and_add_vertex(string &id, Vertex &vertex, map<string, Vertex> &nameV
  * where token describes the connection between actor id1 and id2.
  * Adds those edges to the graph and creates the vertices if needed
  */
-void parse_file(Graph &g, ifstream &infile, map<string, Vertex> &nameVertexMap) {
-	int index = 0;
+void parse_file(Graph &g, ifstream &infile, map<string, Vertex> &nameVertexMap, int &index) {
 	while(!infile.eof()) { 
 		// file not over, read a line
 		
@@ -77,6 +77,7 @@ void parse_file(Graph &g, ifstream &infile, map<string, Vertex> &nameVertexMap) 
 void load(Graph &g, int numfiles)
 {
 	char filename[10];
+	int index = 0;
 	map<string, Vertex> nameVertexMap; //maps the textfile known vertex-ids to internal graph ids
 	
 	for(int i = 1; i <= numfiles; ++i) { 
@@ -88,7 +89,7 @@ void load(Graph &g, int numfiles)
 			cout << "Error: unable to open file a" << i << ".txt" << endl;
 			exit(-1);
 		}
-		
-		parse_file(g, infile, nameVertexMap);	
+		cout << "entered" << endl;
+		parse_file(g, infile, nameVertexMap, index);	
 	}
 }

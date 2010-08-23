@@ -2,7 +2,7 @@
 #include "file_loader.h"
 #include "degree.h"
 #include "betweenness.h"
-#include <iostream>
+#include <sstream>
 
 /* FUNCTION: num_of_files
  * DESC: get the number of arguments (argc) and the arguments themselves,
@@ -14,7 +14,8 @@ int num_of_files(int argc, char * number) {
 	if (argc == 2) {
 		string text_number(number);
 		int num_files;
-		istringstream(text_number) >> num_files;
+		istringstream ss(text_number);
+		ss >> num_files;
 		return num_files;
 	}
 	else return 0;
@@ -32,3 +33,4 @@ int main(int argc, char** args)
 
 	return 0;
 }
+

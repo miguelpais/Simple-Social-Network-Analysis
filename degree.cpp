@@ -72,7 +72,7 @@ void output_degree_info(Graph &g, vector<double> &centrality, double &group_cent
 void normalize_degree_indexes(Graph &g, vector<double> &centrality) {
 	property_map<Graph, vertex_index_t>::type vertexIndex = get(vertex_index, g);
 	
-	int normalizer = num_vertices(g) - 1; // g-1
+	double normalizer = num_vertices(g) - 1; // g-1
 	
 	graph_traits<Graph>::vertex_iterator vit, vitEnd;
 
