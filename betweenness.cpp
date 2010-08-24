@@ -21,7 +21,7 @@ void output_betweenness_info(Graph &g, vector<double> &centrality, double &group
 		fprintf(betweenness_file, "%9f %s\n", centrality[vertexIndex[*vit]], vertexName[*vit].c_str());
 	}
 	
-	fprintf(group_betweenness_file, "%9f\n", group_centrality);
+	fprintf(group_betweenness_file, "\n\nGroup Betweenness: %9g\n", group_centrality);
 	
 	fclose(betweenness_file);
 	fclose(group_betweenness_file);

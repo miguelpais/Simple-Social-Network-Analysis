@@ -10,14 +10,20 @@
 
 int get_line_from_file(ifstream &infile, string &token, string &idfrom, string &idto) {
 	infile >> token;
-	if(infile.fail())
+	if(infile.fail()) {	
 		return -1;
+	}
+	
 	infile >> idfrom;
-	if(infile.fail())
+	if(infile.fail()) {
 		return -1;
+	}
+	
 	infile >> idto;
-	if(infile.fail())
+	if(infile.fail()) {
 		return -1;
+	}
+	
 	return 0;
 }
 
@@ -43,6 +49,17 @@ void check_and_add_vertex(string &id, Vertex &vertex, map<string, Vertex> &nameV
 	}
 }
 
+/* FUNCTION: is_friendship_relationship
+ * DESC: Determines if the relationship line just read from the file
+ * is a friendship one. If it does, it is identified in the file
+ * by the token "a" which we must have read
+ * WARN: token is a string but we're dealing with it as a char
+ * works as long as the tokens in the file are all 1-char long
+ */
+inline int is_friendship_relationship(string token) {
+	return token[0] == 'a';     //     /!\ SEE WARN
+}
+
 
 /* FUNCTION: parse_file
  * DESC: Reads the file infile consisting of lines following the format
@@ -51,13 +68,17 @@ void check_and_add_vertex(string &id, Vertex &vertex, map<string, Vertex> &nameV
  * Adds those edges to the graph and creates the vertices if needed
  */
 void parse_file(Graph &g, ifstream &infile, map<string, Vertex> &nameVertexMap, int &index) {
+	string token, idfrom, idto;
+	
 	while(!infile.eof()) { 
 		// file not over, read a line
 		
-		string token, idfrom, idto;
-		
 		if (get_line_from_file(infile, token, idfrom, idto) < 0) {
 			break;
+		}
+		
+		if (!is_friendship_relationship(token)) {
+			continue;
 		}
 		
 		Vertex from,to;
@@ -89,7 +110,7 @@ void load(Graph &g, int numfiles)
 			cout << "Error: unable to open file a" << i << ".txt" << endl;
 			exit(-1);
 		}
-		cout << "entered" << endl;
+		
 		parse_file(g, infile, nameVertexMap, index);	
 	}
 }
