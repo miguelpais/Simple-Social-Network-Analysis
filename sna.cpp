@@ -1,7 +1,8 @@
 #include "globals.h"
 #include "file_loader.h"
-#include "degree.h"
-#include "betweenness.h"
+#include "centrality_degree.h"
+#include "prestige_degree.h"
+#include "centrality_betweenness.h"
 #include <iostream>
 #include <sstream>
 
@@ -69,8 +70,12 @@ void inform_user(int num_files, bool is_directed) {
  */
 template <typename Graph> void load_and_process(Graph &g, bool is_directed, int num_files) {
 	load(g, num_files);
-	degree(g, is_directed);
-	betweenness(g);
+	centrality::degree(g, is_directed);
+	centrality::betweenness(g);
+	
+	if (is_directed) {
+		prestige::degree(g);
+	}
 }
 
 
