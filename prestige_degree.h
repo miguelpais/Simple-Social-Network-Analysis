@@ -1,9 +1,8 @@
 #include "globals.h"
+#include "fileout.h"
 
 
 namespace prestige {
-
-	FILE *degrees_file;
 
 	/* FUNCTION: actor_degree
 	 * DESC: Calculates and stores each actor prestige degree in an vector
@@ -19,26 +18,6 @@ namespace prestige {
 			prestige[vertexIndex[*vit]] = in_degree(*vit, g);
 		}
 	}
-
-	/* FUNCTION: output_degree_info
-	 * DESC: Outputs all the info previously calculated by the functions actor_prestige_degree (after normalization)
-	 */
-
-	template <typename Graph> void output_degree_info(Graph &g, vector<double> &prestige) {
-		typename property_map<Graph, vertex_name_t>::type vertexName = get(vertex_name, g);
-		typename property_map<Graph, vertex_index_t>::type vertexIndex = get(vertex_index, g);
-		degrees_file = fopen("actor_prestige_degrees.txt", "w");
-	
-		typename graph_traits<Graph>::vertex_iterator vit, vitEnd;
-
-		for(tie(vit, vitEnd) = vertices(g); vit != vitEnd; ++vit) {
-		
-			fprintf(degrees_file, "%9g %s\n", prestige[vertexIndex[*vit]], vertexName[*vit].c_str());
-		}
-	
-		fclose(degrees_file);
-	}
-
 
 	/* FUNCTION: normalize_degree_indexes
 	 * DESC: normalizes all the actor prestige indexes
@@ -67,10 +46,11 @@ namespace prestige {
 
 	template <typename Graph> void degree(Graph &g) {
 		vector<double> prestige(num_vertices(g));
+		double group_index;
 
 		actor_degree(g, prestige);
 		normalize_degree_indexes(g, prestige);
 	
-		output_degree_info(g, prestige);
+		fileout::output_info(g, prestige, group_index,  "actor_prestige_degrees.txt", "group_prestige.txt");
 	}
 }

@@ -1,10 +1,8 @@
 #include "globals.h"
+#include "fileout.h"
 
 
 namespace centrality {
-
-	FILE *degrees_file;
-	FILE *group_degree_file;
 
 	/* FUNCTION: actor_degree
 	 * DESC: Calculates and stores each actor degree in a vector
@@ -64,30 +62,7 @@ namespace centrality {
 
 		group_centrality = sum_difs/denominator;
 	}
-
-	/* FUNCTION: output_info
-	 * DESC: Outputs all the info previously calculated by the funcions actor and group degree
-	 */
-
-	template <typename Graph> void output_degree_info(Graph &g, vector<double> &centrality, double &group_centrality) {
-		typename property_map<Graph, vertex_name_t>::type vertexName = get(vertex_name, g);
-		typename property_map<Graph, vertex_index_t>::type vertexIndex = get(vertex_index, g);
-		degrees_file = fopen("actor_centrality_degrees.txt", "w");
-		group_degree_file = fopen("group_centrality_degree.txt", "w");	
-
-		typename graph_traits<Graph>::vertex_iterator vit, vitEnd;
-
-		for(tie(vit, vitEnd) = vertices(g); vit != vitEnd; ++vit) {
 	
-			fprintf(degrees_file, "%9g %s\n", centrality[vertexIndex[*vit]], vertexName[*vit].c_str());
-		}
-
-		fprintf(group_degree_file, "Group Degree: %9g\n", group_centrality);	
-
-		fclose(degrees_file);
-		fclose(group_degree_file);
-	}
-
 
 	/* FUNCTION: normalize_degree_indexes
 	 * DESC: normalizes all the actor centrality indexes
@@ -123,6 +98,6 @@ namespace centrality {
 		}
 
 		normalize_degree_indexes(g, centrality);
-		output_degree_info(g, centrality, group_centrality);
+		fileout::output_info(g, centrality, group_centrality, "actor_centrality_degrees.txt", "group_centrality_degree.txt");
 	}
 }
