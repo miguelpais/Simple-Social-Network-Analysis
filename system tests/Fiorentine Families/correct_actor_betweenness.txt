@@ -1,0 +1,15 @@
+0.000   Acciaiuoli
+0.522   Medici
+0.212   Albizzi
+0.000   Ginori
+0.255   Gaudagni
+0.093   Barbadori
+0.055   Castellani
+0.104   Bischeri
+0.022   Peruzzi
+0.103   Strozzi
+0.000   Lamberteschi
+0.092   Tornabuoni
+0.114   Ridolfi
+0.143   Salviati
+0.000   Pazzi

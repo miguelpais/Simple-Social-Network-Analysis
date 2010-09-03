@@ -19,7 +19,7 @@ namespace fileout {
 		typename graph_traits<Graph>::vertex_iterator vit, vitEnd;
 
 		for(tie(vit, vitEnd) = vertices(g); vit != vitEnd; ++vit) {
-			fprintf(actor_index_file, "%s %14f\n", vertexName[*vit].c_str(), actor_indexes[vertexIndex[*vit]]);
+			fprintf(actor_index_file, "%.3f   %s\n", actor_indexes[vertexIndex[*vit]], vertexName[*vit].c_str());
 		}
 	}
 
@@ -28,7 +28,7 @@ namespace fileout {
 	 */
 
 	void output_group_index(double &group_index, FILE *group_index_file) {
-		fprintf(group_index_file, "Group Level Index: %9g\n", group_index);
+		fprintf(group_index_file, "Group Level Index: %.3g\n", group_index);
 	}
 
 
