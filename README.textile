@@ -51,6 +51,11 @@ Each line in the file will represent an edge, and must be formatted as follows:
 
 Where {source_vertex} {destination_vertex} are the vertices' names / Ids. These ids cannot have spaces in them.
 
+Example:
+
+@a Albizzi Medici@
+@a Barbadori Castellani@
+
 If the graph is undirected you don't need to repeat the same tie with reversed source and destination vertices.
 
 h4. Command Arguments
@@ -64,7 +69,7 @@ Tells it to load a directed graph dispersed in two text files named a1.txt and a
 h2. Forking the Code
 
 If you end up forking this code there is a folder named system tests which may help you know if something got broken with the changes made. 
-It contains a sample graph presented in "Social Network Analysis: Methods and Applications":http://www.amazon.com/Social-Network-Analysis-Applications-Structural/dp/0521387078/ref=sr_1_1?ie=UTF8&s=books&qid=1283629031&sr=8-1 of a undirected graph of marital relationships of 15 Fiorentine Families of the XV century. The text files on that folder have the correct data that should be output for that graph.
+It contains an undirected graph presented in "Social Network Analysis: Methods and Applications":http://www.amazon.com/Social-Network-Analysis-Applications-Structural/dp/0521387078/ref=sr_1_1?ie=UTF8&s=books&qid=1283629031&sr=8-1 of marital relationships of 15 Fiorentine Families of the XV century. The text files on that folder have the correct data that should be output for that graph.
 
 h3. Running the tests
 
