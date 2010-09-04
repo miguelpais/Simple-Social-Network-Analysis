@@ -1,0 +1,73 @@
+h1(1). Social Network Analysis on top of Boost C++ Graph Library*
+
+
+For the moment the code presented in this repository is able to calculate the following metrics of actor prominence:
+
+* Actor Degree Centrality
+* Group Degree Centrality
+* Actor Betweenness Centrality
+* Group Betweenness Centrality
+* Actor Degree Prestige
+
+and the following utility properties:
+
+* Graph Density
+
+h2.Dependencies
+
+The code presented here depends on the Boost C++ Graph Library. You can grab it "()here":http://www.boost.org/.
+
+Boost will not need to be installed, simply save it in some folder.
+
+You also need the GNU G++ Compiler.
+
+
+h2. Installing
+
+The code needs not to be installed, simply modify the makefile presented to point to the Boost folder:
+
+@g++ *.cpp -o out -I<path_to_boost_folder>@
+
+and then, simply type _make_ to compile the project.
+
+
+h2. Running
+
+The code reads a graph without isolated vertices presented in text format and produces text files with the results for every metric and property above.
+
+After running _make_ there will be an binary named _out_ in the project folder.
+
+h3. Running Requirements
+
+One the same folder has the _out_ binary will need to be a graph represented in text format with the following structure.
+
+h4. Graph format
+
+The graph must be represented in a sequence of files named a{x}.txt where {x} is a number from 1 to N. This way, you can represent all your graph in just one file, or break it down in several ones.
+
+Each line in the file will represent an edge, and must be formatted as follows:
+
+@a {source_vertex} {destination_vertex2}@
+
+Where {source_vertex} {destination_vertex} are the vertices' names / Ids. These ids cannot have spaces in them.
+
+If the graph is undirected you don't need to repeat the same tie with reversed source and destination vertices.
+
+h4. Command Arguments
+
+The executable accepts two command line arguments. A number of files argument, and a flag to indicate whether the graph is directed (-d) or undirected (-u). Example:
+
+@ $ ./out 2 -d@
+
+Tells it to load a directed graph dispersed in two text files named a1.txt and a2.txt, which will have to be present it the same folder as _out_. *The order of the arguments cannot be changed*. 
+
+h2. Forking the Code
+
+If you end up forking this code there is a folder named system tests which may help you know if something got broken with the changes made. 
+It contains a sample graph presented in "()Social Network Analysis: Methods and Applications":http://www.amazon.com/Social-Network-Analysis-Applications-Structural/dp/0521387078/ref=sr_1_1?ie=UTF8&s=books&qid=1283629031&sr=8-1 of a undirected graph of marital relationships of 15 Fiorentine Families of the XV century. The text files on that folder have the correct data that should be output for that graph.
+
+h3. Running the tests
+
+To run the tests use the following command from the main project folder:
+
+@$ ruby run_tests.rb
