@@ -30,7 +30,7 @@ namespace centrality {
 		double max_centrality = highest(centrality); // Centrality{Degree}(n*) see globals.h for function definition
 		double max_connects = num_vertices(g) -1; // g-1
 		double denominator = max_connects * (max_connects -1); // (g-1)(g-2)
-
+		
 		vector<double>::iterator it;
 
 		for(it = centrality.begin(); it != centrality.end(); ++it) {

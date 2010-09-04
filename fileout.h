@@ -7,6 +7,7 @@ namespace fileout {
 	
 	FILE *actor_index_file;
 	FILE *group_index_file;
+	FILE *density_file;
 	
 	
 	/* FUNCTION: output_actor_indexes
@@ -48,6 +49,18 @@ namespace fileout {
 
 		fclose(actor_index_file);
 		fclose(group_index_file);
+	}
+	
+	
+	/* FUNCTION: output_density
+	 * DESC: Outputs to a file the density of the graph
+	 */
+	void output_density(double density) {
+		density_file = fopen("density.txt", "w");
+		
+		fprintf(density_file, "Graph Density: %.3g\n", density);
+		
+		fclose(density_file);
 	}
 }
 #endif

@@ -1,6 +1,7 @@
 #include "globals.h"
 #include "filein.h"
 #include "fileout.h"
+#include "properties.h"
 #include "centrality_degree.h"
 #include "prestige_degree.h"
 #include "centrality_betweenness.h"
@@ -67,10 +68,15 @@ void inform_user(int num_files, bool is_directed) {
 
 
 /* FUNCTION: load_and_process
- * DESC: loads the graph and calculated the degree and betweenness metrics
+ * DESC: loads the graph and calculates the degree and betweenness metrics
+ * Each of the following functions as the side effect or outputting the information
+ * to text files automatically
  */
 template <typename Graph> void load_and_process(Graph &g, bool is_directed, int num_files) {
 	filein::load(g, num_files);
+	
+	properties::density(g, is_directed);
+	
 	centrality::degree(g, is_directed);
 	centrality::betweenness(g);
 	
