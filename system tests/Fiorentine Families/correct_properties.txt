@@ -1,0 +1,3 @@
+Number of Edges: 20
+Number of Vertices: 15
+Graph Density: 0.19

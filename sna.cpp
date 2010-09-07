@@ -75,6 +75,7 @@ void inform_user(int num_files, bool is_directed) {
 template <typename Graph> void load_and_process(Graph &g, bool is_directed, int num_files) {
 	filein::load(g, num_files);
 	
+	properties::num_edges_vertices(g);
 	properties::density(g, is_directed);
 	
 	centrality::degree(g, is_directed);

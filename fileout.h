@@ -7,7 +7,7 @@ namespace fileout {
 	
 	FILE *actor_index_file;
 	FILE *group_index_file;
-	FILE *density_file;
+	FILE *properties_file;
 	
 	
 	/* FUNCTION: output_actor_indexes
@@ -56,11 +56,25 @@ namespace fileout {
 	 * DESC: Outputs to a file the density of the graph
 	 */
 	void output_density(double density) {
-		density_file = fopen("density.txt", "w");
+		properties_file = fopen("properties.txt", "a");
 		
-		fprintf(density_file, "Graph Density: %.3g\n", density);
+		fprintf(properties_file, "Graph Density: %.3g\n", density);
 		
-		fclose(density_file);
+		fclose(properties_file);
+	}
+	
+	
+	/* FUNCTION: output_num_edges_vertices
+	 * DESC: Outputs to a file the received number of vertices and
+	 * edges of the graph
+	 */
+	void output_num_edges_vertices(int num_edges, int num_vertices) {
+		properties_file = fopen("properties.txt", "a");
+		
+		fprintf(properties_file, "Number of Edges: %d\n", num_edges);
+		fprintf(properties_file, "Number of Vertices: %d\n", num_vertices);
+		
+		fclose(properties_file);
 	}
 }
 #endif

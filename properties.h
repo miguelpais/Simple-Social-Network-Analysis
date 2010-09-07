@@ -46,4 +46,11 @@ namespace properties {
 		
 		fileout::output_density(density);
 	}
+	
+	/* FUNCTION: print_num_edges_vertices(Graph &g)
+	 * DESC: Prints to the file the number of edges and vertices of the graph
+	 */
+	template<typename Graph> void num_edges_vertices(Graph &g) {
+		fileout::output_num_edges_vertices(num_edges(g), num_vertices(g));
+	}
 }

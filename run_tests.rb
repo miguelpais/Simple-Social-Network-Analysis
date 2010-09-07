@@ -36,12 +36,12 @@ else
       puts "04. PASSED: Group Betweenness Test"
    end
    
-   test5 = %x[diff "system tests/Fiorentine Families/density.txt" "system tests/Fiorentine Families/correct_density.txt"]
+   test5 = %x[diff "system tests/Fiorentine Families/properties.txt" "system tests/Fiorentine Families/correct_properties.txt"]
    if test5 != ""
-      puts "05. FAILED: Density Test"
+      puts "05. FAILED: Properties Test"
       puts test5
    else
-      puts "05. PASSED: Density Test"
+      puts "05. PASSED: Properties Test"
    end
 
    if test1 == "" and test2 == ""  and test3 == "" and test4 == "" and test5 == ""
@@ -50,7 +50,7 @@ else
       %x[rm "system tests/Fiorentine Families/actor_betweenness.txt"]
       %x[rm "system tests/Fiorentine Families/group_centrality_degree.txt"]
       %x[rm "system tests/Fiorentine Families/actor_centrality_degrees.txt"]
-      %x[rm "system tests/Fiorentine Families/density.txt"]
+      %x[rm "system tests/Fiorentine Families/properties.txt"]
       %x[rm "system tests/Fiorentine Families/out"]
    end
 end
