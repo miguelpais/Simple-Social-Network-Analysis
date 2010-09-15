@@ -62,7 +62,7 @@ bool determine_directed(int argc, char * param) {
  */
 void inform_user(int num_files, bool is_directed) {
 	cout << "Processing " << num_files << (num_files == 1 ? " file..." : " files...") << endl;
-	cout << "Processing a " << (is_directed ? "directed" : "undirected") << " graph..." << endl;
+	cout << "Processing " << (is_directed ? "a directed" : "an undirected") << " graph..." << endl;
 }
 
 

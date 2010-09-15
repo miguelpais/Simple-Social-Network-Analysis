@@ -15,12 +15,11 @@ namespace fileout {
 	 */
 	template <typename Graph> void output_actor_indexes(Graph &g, vector<double> &actor_indexes, FILE *actor_index_file) {
 		typename property_map<Graph, vertex_name_t>::type vertexName = get(vertex_name, g);
-		typename property_map<Graph, vertex_index_t>::type vertexIndex = get(vertex_index, g);
 
 		typename graph_traits<Graph>::vertex_iterator vit, vitEnd;
 
 		for(tie(vit, vitEnd) = vertices(g); vit != vitEnd; ++vit) {
-			fprintf(actor_index_file, "%.3f   %s\n", actor_indexes[vertexIndex[*vit]], vertexName[*vit].c_str());
+			fprintf(actor_index_file, "%.3f   %s\n", actor_indexes[*vit], vertexName[*vit].c_str());
 		}
 	}
 

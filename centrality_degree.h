@@ -11,12 +11,11 @@ namespace centrality {
 	 * vertex is tied to
 	 */
 	template <typename Graph> void actor_degree(Graph &g, vector<double> &centrality) {
-		typename property_map<Graph, vertex_index_t>::type vertexIndex = get(vertex_index, g);
 		typename graph_traits<Graph>::vertex_iterator vit, vitEnd;
 
 		for(tie(vit, vitEnd) = vertices(g); vit != vitEnd; ++vit) {
-
-			centrality[vertexIndex[*vit]] = out_degree(*vit, g);
+			
+			centrality[*vit] = out_degree(*vit, g);
 		}
 	}
 
@@ -69,18 +68,16 @@ namespace centrality {
 	 * Normalized_Centrality{Degree} = Regular_Centrality{Degree} / (g-1)
 	 */
 	template <typename Graph> void normalize_degree_indexes(Graph &g, vector<double> &centrality) {
-		typename property_map<Graph, vertex_index_t>::type vertexIndex = get(vertex_index, g);
-
 		double normalizer = num_vertices(g) - 1; // g-1
 
 		typename graph_traits<Graph>::vertex_iterator vit, vitEnd;
 
 		for(tie(vit, vitEnd) = vertices(g); vit != vitEnd; ++vit) {
 
-			double unormalized_centrality = centrality[vertexIndex[*vit]];
+			double unormalized_centrality = centrality[*vit];
 			double normalized_centrality = unormalized_centrality / normalizer;
 
-			centrality[vertexIndex[*vit]] = normalized_centrality;
+			centrality[*vit] = normalized_centrality;
 		}
 	}
 

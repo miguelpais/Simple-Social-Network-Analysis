@@ -35,9 +35,8 @@ namespace filein {
 	 * exists in the graph as a vertex. If not it creates it.
 	 */
 
-	template <typename Graph, typename Vertex> void check_and_add_vertex(string &id, Vertex &vertex, map<string, Vertex> &nameVertexMap, Graph &g, int &index) {
+	template <typename Graph, typename Vertex> void check_and_add_vertex(string &id, Vertex &vertex, map<string, Vertex> &nameVertexMap, Graph &g) {
 		typename property_map<Graph, vertex_name_t>::type vertexName = get(vertex_name, g);
-		typename property_map<Graph, vertex_index_t>::type vertexIndex = get(vertex_index, g);
 		typename map<string, Vertex>::iterator it;
 
 		it = nameVertexMap.find(id);
@@ -45,7 +44,6 @@ namespace filein {
 			vertex = add_vertex(g);
 			vertexName[vertex] = id; //mapping the vertexID we got from the textfile to its internal id in the graph structure
 			nameVertexMap[id] = vertex; //the same the other way around
-	      	vertexIndex[vertex] = index++;
 		}
 		else {
 			vertex = it->second;
@@ -70,7 +68,7 @@ namespace filein {
 	 * where token describes the connection between actor id1 and id2.
 	 * Adds those edges to the graph and creates the vertices if needed
 	 */
-	template <typename Graph, typename Vertex> void parse_file(Graph &g, ifstream &infile, map<string, Vertex> &nameVertexMap, int &index) {
+	template <typename Graph, typename Vertex> void parse_file(Graph &g, ifstream &infile, map<string, Vertex> &nameVertexMap) {
 		string token, idfrom, idto;
 
 		while(!infile.eof()) { 
@@ -85,9 +83,8 @@ namespace filein {
 			}
 
 			Vertex from,to;
-			check_and_add_vertex(idfrom, from, nameVertexMap, g, index);
-			check_and_add_vertex(idto, to, nameVertexMap, g, index);
-
+			check_and_add_vertex(idfrom, from, nameVertexMap, g);
+			check_and_add_vertex(idto, to, nameVertexMap, g);
 
 			add_edge(from, to, g);
 		} 
@@ -103,7 +100,6 @@ namespace filein {
 		typedef typename graph_traits<Graph>::vertex_descriptor Vertex;
 
 		char filename[10];
-		int index = 0;
 		map<string, Vertex> nameVertexMap; //maps the textfile known vertex-ids to internal graph ids
 
 		for(int i = 1; i <= numfiles; ++i) { 
@@ -116,7 +112,7 @@ namespace filein {
 				exit(-1);
 			}
 
-			parse_file(g, infile, nameVertexMap, index);	
+			parse_file(g, infile, nameVertexMap);	
 		}
 	}
 }

@@ -29,7 +29,6 @@ namespace centrality {
 	 * Normalized_Centrality{Betweeness} = Regular_Centrality{Betweenness} / ((g-1)(g-2) / 2)
 	 */
 	template <typename Graph> void normalize_betweenness_indexes(Graph &g, vector<double> &centrality) {
-		typename property_map<Graph, vertex_index_t>::type vertexIndex = get(vertex_index, g);
 	
 		int max_connects = num_vertices(g) - 1; // g-1
 		double normalizer = max_connects * (max_connects -1) / 2.0; // (g-1)(g-2) / 2
@@ -38,10 +37,10 @@ namespace centrality {
 
 		for(tie(vit, vitEnd) = vertices(g); vit != vitEnd; ++vit) {
 
-			double unormalized_centrality = centrality[vertexIndex[*vit]];
+			double unormalized_centrality = centrality[*vit];
 			double normalized_centrality = unormalized_centrality / normalizer;
 
-			centrality[vertexIndex[*vit]] = normalized_centrality;
+			centrality[*vit] = normalized_centrality;
 		}
 	}
 

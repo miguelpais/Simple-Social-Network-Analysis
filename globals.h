@@ -9,9 +9,9 @@
 using namespace boost;
 using namespace std;
 
-typedef property<vertex_index_t, int, property<vertex_name_t, string> > VertexProperty;
-typedef adjacency_list<vecS, setS, undirectedS, VertexProperty > UndirectedGraph; 
-typedef	adjacency_list<vecS, setS, bidirectionalS, VertexProperty > DirectedGraph; //bidirectionalS takes up twice the mem
+typedef property<vertex_name_t, string> VertexProperty;
+typedef adjacency_list<setS, vecS, undirectedS, VertexProperty > UndirectedGraph; 
+typedef	adjacency_list<setS, vecS, bidirectionalS, VertexProperty > DirectedGraph; //bidirectionalS takes up twice the mem
 
 template<typename T> T highest(vector<T> &obj) {
 	typename vector<T>::iterator it;

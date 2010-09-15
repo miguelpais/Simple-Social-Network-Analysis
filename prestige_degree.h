@@ -10,12 +10,11 @@ namespace prestige {
 	 * This index can only be calculate for unidirectional relations
 	 */
 	template <typename Graph> void actor_degree(Graph &g, vector<double> &prestige) {
-		typename property_map<Graph, vertex_index_t>::type vertexIndex = get(vertex_index, g);
 		typename graph_traits<Graph>::vertex_iterator vit, vitEnd;
 
 		for(tie(vit, vitEnd) = vertices(g); vit != vitEnd; ++vit) {
 
-			prestige[vertexIndex[*vit]] = in_degree(*vit, g);
+			prestige[*vit] = in_degree(*vit, g);
 		}
 	}
 
@@ -24,18 +23,16 @@ namespace prestige {
 	 * Normalized_Prestige{Degree} = Regular_Prestige{Degree} / (g-1)
 	 */
 	template <typename Graph> void normalize_degree_indexes(Graph &g, vector<double> &prestige) {
-		typename property_map<Graph, vertex_index_t>::type vertexIndex = get(vertex_index, g);
-	
 		double normalizer = num_vertices(g) - 1; // g-1
 	
 		typename graph_traits<Graph>::vertex_iterator vit, vitEnd;
 
 		for(tie(vit, vitEnd) = vertices(g); vit != vitEnd; ++vit) {
 
-			double unormalized_prestige = prestige[vertexIndex[*vit]];
+			double unormalized_prestige = prestige[*vit];
 			double normalized_prestige = unormalized_prestige / normalizer;
 
-			prestige[vertexIndex[*vit]] = normalized_prestige;
+			prestige[*vit] = normalized_prestige;
 		}
 	}
 
