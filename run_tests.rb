@@ -44,13 +44,13 @@ else
       puts "05. PASSED: Properties Test"
    end
 
-   if test1 == "" and test2 == ""  and test3 == "" and test4 == "" and test5 == ""
-      puts "Removing moved and generated files...\nOK!\n"
-      %x[rm "system tests/Fiorentine Families/group_betweenness.txt"]
-      %x[rm "system tests/Fiorentine Families/actor_betweenness.txt"]
-      %x[rm "system tests/Fiorentine Families/group_centrality_degree.txt"]
-      %x[rm "system tests/Fiorentine Families/actor_centrality_degrees.txt"]
-      %x[rm "system tests/Fiorentine Families/properties.txt"]
-      %x[rm "system tests/Fiorentine Families/out"]
-   end
+   puts "Removing moved and generated files..."
+   %x[rm "system tests/Fiorentine Families/group_betweenness.txt"]
+   %x[rm "system tests/Fiorentine Families/actor_betweenness.txt"]
+   %x[rm "system tests/Fiorentine Families/group_centrality_degree.txt"]
+   %x[rm "system tests/Fiorentine Families/actor_centrality_degrees.txt"]
+   %x[rm "system tests/Fiorentine Families/properties.txt"]
+   %x[rm "system tests/Fiorentine Families/out"]
+   puts "OK"
+
 end
