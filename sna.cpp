@@ -15,8 +15,8 @@
  * WARN: passing a number bigger than int will result in failure
  * Also, sometimes passing certain chars may be accepted and converted to int
  */
-int num_of_files(int argc, char * number) {
-	if (argc > 1) {
+int detect_number(int order, int argc, char * number) {
+	if (argc > order) {
 		string text_number(number);
 		int num_files;
 		istringstream ss(text_number);
@@ -24,8 +24,8 @@ int num_of_files(int argc, char * number) {
 		return num_files;
 	}
 	else {
-		cout << "[Usage:] ./out {num_files} {-u | -d}" << endl;
-		cout << "[Error:] Number of files not supplied, exiting..." << endl;
+		cout << "[Usage:] ./out {num_files} {-u | -d} {critical_number}" << endl;
+		cout << "[Error:] Parameter " << order << " not supplied, exiting..." << endl;
 		exit(-1);
 	}
 }
@@ -89,9 +89,11 @@ template <typename Graph> void load_and_process(Graph &g, bool is_directed, int 
 
 int main(int argc, char** args)
 {
-	int num_files = num_of_files(argc, args[1]);
+	int num_files = detect_number(1, argc, args[1]);
 	
 	bool is_directed = determine_directed(argc, args[2]);
+	
+	int critic_number = detect_number(3, argc, args[3]);
 	
 	inform_user(num_files, is_directed);
 
